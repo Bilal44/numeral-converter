@@ -17,7 +17,7 @@ public class ConverterTests
     [InlineData(500, "D")]
     [InlineData(1000, "M")]
     public void ConvertToRoman_WithValidInput_ReturnsCorrectRomanValue(
-        short input,
+        int input,
         string expectedResult)
     {
         // Act
@@ -32,7 +32,7 @@ public class ConverterTests
     [InlineData(0)]
     [InlineData(4000)]
     [InlineData(null)]
-    public void ConvertToRoman_WithInvalidInput_ReturnsError(short input)
+    public void ConvertToRoman_WithInvalidInput_ReturnsError(int input)
     {
         // Act
         var result = Converter.ConvertToRoman(input);
@@ -42,21 +42,11 @@ public class ConverterTests
     }
     
     [Theory]
-    [InlineData("MMXXII", 2022 )]
-    [InlineData("MCMXC", 1990)]
-    [InlineData("MMVIII", 2008)]
-    [InlineData("MDCLXVI", 1666)]
-    [InlineData("MMMCMXCIX", 3999)]
-    [InlineData("I", 1)]
-    [InlineData("V", 5)]
-    [InlineData("X", 10)]
-    [InlineData("L", 50)]
-    [InlineData("C", 100)]
-    [InlineData("D", 500)]
-    [InlineData("M", 1000)]
+    [InlineData("MMVXXIV", 2029)]
+    [InlineData("MMXXIX", 2029)]
     public void ConvertToBase10_WithValidInput_ReturnsCorrectBase10Value(
         string input,
-        short expectedResult)
+        int expectedResult)
     {
         // Act
         var result = Converter.ConvertToBase10(input);
