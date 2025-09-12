@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumeralConverter", " NumeralConverter\NumeralConverter.csproj", "{6DF9DFE8-9447-438A-8EB7-54B2313D19C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumeralConverter.Tests", "NumeralConverter.Tests\NumeralConverter.Tests.csproj", "{3CDD8B98-63F0-4DFA-8A5E-5966E6B753C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6DF9DFE8-9447-438A-8EB7-54B2313D19C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DF9DFE8-9447-438A-8EB7-54B2313D19C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DF9DFE8-9447-438A-8EB7-54B2313D19C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DF9DFE8-9447-438A-8EB7-54B2313D19C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CDD8B98-63F0-4DFA-8A5E-5966E6B753C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CDD8B98-63F0-4DFA-8A5E-5966E6B753C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CDD8B98-63F0-4DFA-8A5E-5966E6B753C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CDD8B98-63F0-4DFA-8A5E-5966E6B753C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
