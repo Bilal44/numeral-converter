@@ -1,4 +1,6 @@
-﻿namespace NumeralConverter;
+﻿using System.Text.RegularExpressions;
+
+namespace NumeralConverter;
 
 public static class Converter
 {
@@ -26,5 +28,43 @@ public static class Converter
         }
         
         return result;
+    }
+    
+    public static short ConvertToBase10(string romanNumber)
+    {
+        ValidateRomanNumber(romanNumber);
+        
+        short result = 0;
+        var index = 0;
+
+        while (index < romanNumber.Length)
+        {
+            foreach (var (value, symbol) in ConversionTable)
+            {
+                if (romanNumber.AsSpan(index).StartsWith(symbol))
+                {
+                    result += value;
+                    index += symbol.Length;
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
+    
+    private static void ValidateRomanNumber(string romanNumber)
+    {
+        if (string.IsNullOrWhiteSpace(romanNumber))
+            throw new ArgumentException("Input cannot be null or empty.");
+        
+        var invalidRepetition  = Regex.Match(romanNumber, @"(.)\1{3}");
+        if (invalidRepetition.Success)
+            throw new ArgumentException($"Input is not a valid roman number '{invalidRepetition.Groups[1].Value}' " +
+                                        "is repeated four or more times consecutively."); ;
+        
+        var containsValidSymbols  = Regex.IsMatch(romanNumber, @"^[IVXLCDM]+$", RegexOptions.IgnoreCase);
+        if (!containsValidSymbols)
+            throw new ArgumentException($"Input is not a valid roman number");
     }
 }

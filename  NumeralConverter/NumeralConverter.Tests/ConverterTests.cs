@@ -40,4 +40,42 @@ public class ConverterTests
         // Assert
         Assert.Equal("Please enter a valid number between 1 and 3999", result);
     }
+    
+    [Theory]
+    [InlineData("MMXXII", 2022 )]
+    [InlineData("MCMXC", 1990)]
+    [InlineData("MMVIII", 2008)]
+    [InlineData("MDCLXVI", 1666)]
+    [InlineData("MMMCMXCIX", 3999)]
+    [InlineData("I", 1)]
+    [InlineData("V", 5)]
+    [InlineData("X", 10)]
+    [InlineData("L", 50)]
+    [InlineData("C", 100)]
+    [InlineData("D", 500)]
+    [InlineData("M", 1000)]
+    public void ConvertToBase10_WithValidInput_ReturnsCorrectBase10Value(
+        string input,
+        short expectedResult)
+    {
+        // Act
+        var result = Converter.ConvertToBase10(input);
+        
+        // Assert
+        Assert.Equal(expectedResult, result);
+    }
+    
+    [Theory]
+    [InlineData("")]
+    [InlineData(null)]
+    [InlineData("2")]
+    [InlineData("ABC")]
+    [InlineData("xxxx")]
+    [InlineData("IIIIVX")]
+    [InlineData("IIIVVVVVVLLCCCC")]
+    public void ConvertToBase10_WithInvalidInput_ReturnsError(string input)
+    {
+        // Act & Assert
+        Assert.ThrowsAny<Exception>(() => Converter.ConvertToBase10(input));
+    }
 }
