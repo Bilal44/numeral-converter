@@ -32,6 +32,32 @@ public static class ElementSearcher
     
     public static List<List<string>> GetElements(string word)
     {
-        return [];
+        var results = new List<List<string>>();
+        Backtrack(word, 0, [], results);
+        return results;
+    }
+    
+    private static void Backtrack(string word, int position, List<string> matchedElements, List<List<string>> results)
+    {
+        if (position == word.Length)
+        {
+            results.Add([..matchedElements]);
+            return;
+        }
+    
+        for (var i = 1; i <= 2; i++)
+        {
+            if (position + i > word.Length)
+                break;
+    
+            var symbol = word.AsSpan(position, i).ToTitleCase();
+            
+            if (Elements.TryGetValue(symbol, out var name))
+            {
+                matchedElements.Add($"{name} ({symbol})");
+                Backtrack(word, position +  i, matchedElements, results);
+                matchedElements.RemoveAt(matchedElements.Count - 1);
+            }
+        }
     }
 }
