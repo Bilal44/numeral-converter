@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumeralConverter", " NumeralConverter\NumeralConverter.csproj", "{6DF9DFE8-9447-438A-8EB7-54B2313D19C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumeralConverter", "NumeralConverter\NumeralConverter.csproj", "{6DF9DFE8-9447-438A-8EB7-54B2313D19C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumeralConverter.Tests", "NumeralConverter.Tests\NumeralConverter.Tests.csproj", "{3CDD8B98-63F0-4DFA-8A5E-5966E6B753C6}"
 EndProject

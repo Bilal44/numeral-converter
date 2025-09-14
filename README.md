@@ -1,3 +1,5 @@
+[![Unit Tests CI Status](https://github.com/Bilal44/numeral-converter/actions/workflows/ci.yml/badge.svg)](https://github.com/Bilal44/numeral-converter/actions/workflows/ci.yml)
+
 # Roman Numeral Converter
 Contrary to my initial assumption, it was quite an enjoyable exercise, especially going through the validation rules. It was also interesting to read on Wikipedia how numbers like IIII, XXXX, CCCCLXXXX were historically used but will now be considered completely invalid. I have been exploring the rules further on [Project Euler](https://projecteuler.net/about=roman_numerals). I might find some time to fully implement all of it one day. :)
 
