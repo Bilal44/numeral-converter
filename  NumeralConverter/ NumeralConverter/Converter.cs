@@ -10,6 +10,7 @@ public static class Converter
         (100, "C"), (90, "XC"), (50, "L"), (40, "XL"),
         (10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I")
     };
+    
     public static string ConvertToRoman(int number)
     {
         if (number is < 1 or > 3999)
@@ -56,15 +57,16 @@ public static class Converter
     private static void ValidateRomanNumber(string romanNumber)
     {
         if (string.IsNullOrWhiteSpace(romanNumber))
-            throw new ArgumentException("Input cannot be null or empty.");
+            throw new ArgumentException("Please provide a valid roman number.");
+        
+        var containsValidSymbols  = Regex.IsMatch(romanNumber, "^[IVXLCDM]+$", RegexOptions.IgnoreCase);
+        if (!containsValidSymbols)
+            throw new ArgumentException("Please provide a valid roman number.");
         
         var invalidRepetition  = Regex.Match(romanNumber, @"(.)\1{3}");
         if (invalidRepetition.Success)
-            throw new ArgumentException($"Input is not a valid roman number '{invalidRepetition.Groups[1].Value}' " +
-                                        "is repeated four or more times consecutively.");
+            throw new ArgumentException($"Not a valid roman number since'{{invalidRepition.Groups[1].Value}}' " +
+                                        "is repeated more than three times.");
         
-        var containsValidSymbols  = Regex.IsMatch(romanNumber, @"^[IVXLCDM]+$", RegexOptions.IgnoreCase);
-        if (!containsValidSymbols)
-            throw new ArgumentException($"Input is not a valid roman number.");
     }
 }
