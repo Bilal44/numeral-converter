@@ -32,32 +32,47 @@ public static class ElementSearcher
     
     public static List<List<string>> GetElements(string word)
     {
-        var results = new List<List<string>>();
-        Backtrack(word, 0, [], results);
-        return results;
+        if (string.IsNullOrWhiteSpace(word))
+            return [];
+        
+        var memo = new Dictionary<int, List<List<string>>>();
+        return Backtrack(word, 0, memo);
     }
     
-    private static void Backtrack(string word, int position, List<string> matchedElements, List<List<string>> results)
+    private static List<List<string>> Backtrack(string word, int position, Dictionary<int, List<List<string>>> memo)
     {
+        if (memo.TryGetValue(position, out var cached))
+            return cached;
+        
+        var results = new List<List<string>>();
         if (position == word.Length)
         {
-            results.Add([..matchedElements]);
-            return;
+            results.Add([]);
         }
-    
-        for (var i = 1; i <= 2; i++)
+        else
         {
-            if (position + i > word.Length)
-                break;
-    
-            var symbol = word.AsSpan(position, i).ToTitleCase();
-            
-            if (Elements.TryGetValue(symbol, out var name))
+            for (var i = 1; i <= 2; i++)
             {
-                matchedElements.Add($"{name} ({symbol})");
-                Backtrack(word, position +  i, matchedElements, results);
-                matchedElements.RemoveAt(matchedElements.Count - 1);
+                if (position + i > word.Length)
+                    break;
+                
+                var symbol = word.AsSpan(position, i).ToTitleCase();
+                
+                if (Elements.TryGetValue(symbol, out var name))
+                {
+                    var currentResults = Backtrack(word, position + i, memo);
+
+                    foreach (var path in currentResults)
+                    {
+                        var newPath = new List<string> { $"{name} ({symbol})" };
+                        newPath.AddRange(path);
+                        results.Add(newPath);
+                    }
+                }
             }
         }
+        
+        memo[position] = results;
+        return results;
     }
 }
