@@ -20,7 +20,7 @@ public static class Converter
         
         foreach (var (value, romanSymbol) in ConversionTable)
         {
-            // Reduce the number by the biggest available roman symbol
+            // Reduce the number by the largest available roman symbol
             while (number >= value)
             {
                 number -= value;
@@ -42,15 +42,16 @@ public static class Converter
         {
             foreach (var (value, symbol) in ConversionTable)
             {
-                if (romanNumber.AsSpan(index).StartsWith(symbol))
+                // Retrieve the matching roman symbol (largest first)
+                // and add its value to the running total
+                if (romanNumber.ToUpper().AsSpan(index).StartsWith(symbol))
                 {
                     result += value;
                     index += symbol.Length;
-                    break;
                 }
             }
         }
-
+        
         return result;
     }
     
@@ -65,7 +66,7 @@ public static class Converter
         
         var invalidRepetition  = Regex.Match(romanNumber, @"(.)\1{3}");
         if (invalidRepetition.Success)
-            throw new ArgumentException($"Not a valid roman number since'{{invalidRepition.Groups[1].Value}}' " +
+            throw new ArgumentException($"Not a valid roman number since '{invalidRepetition.Groups[1].Value}' " +
                                         "is repeated more than three times.");
         
     }

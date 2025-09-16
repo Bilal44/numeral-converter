@@ -54,6 +54,7 @@ public class ConverterTests
     [InlineData("C", 100)]
     [InlineData("D", 500)]
     [InlineData("M", 1000)]
+    [InlineData("mmmDCxvIiI", 3618)] // Mixed-case test
     public void ConvertToBase10_WithValidInput_ReturnsCorrectBase10Value(
         string input,
         int expectedResult)
