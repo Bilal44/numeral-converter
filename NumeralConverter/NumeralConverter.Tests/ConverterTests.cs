@@ -74,6 +74,21 @@ public class ConverterTests
     [InlineData("xxxx")]
     [InlineData("IIIIVX")]
     [InlineData("IIIVVVVVVLLCCCC")]
+    /*
+    Invalid cases with newer validation logic from Project Euler (https://projecteuler.net/about=roman_numerals)
+    1. Descending order, the larger symbol must occur first
+    2. Validate subtractive notations (e.g., IV, XL, CM are valid but XM is not)
+    3. "Contemporary" repetition rules (a symbol must not occur more than three times; D, L and V can only appear once)
+    */
+    [InlineData("IXX")]
+    [InlineData("VX")]
+    [InlineData("IL")]
+    [InlineData("XVIV")]
+    [InlineData("XM")]
+    [InlineData("LLX")]
+    [InlineData("DDL")]
+    [InlineData("LC")]
+    [InlineData("VL")]
     public void ConvertToBase10_WithInvalidInput_ReturnsError(string input)
     {
         // Act & Assert

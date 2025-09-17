@@ -33,6 +33,10 @@ public static class Converter
     
     public static int ConvertToBase10(string romanNumber)
     {
+        if (string.IsNullOrWhiteSpace(romanNumber))
+            throw new ArgumentException("A roman number value must be provided."); 
+        
+        romanNumber = romanNumber.ToUpperInvariant();
         ValidateRomanNumber(romanNumber);
         
         var result = 0;
@@ -44,7 +48,7 @@ public static class Converter
             {
                 // Retrieve the matching roman symbol (largest first)
                 // and add its value to the running total
-                if (romanNumber.ToUpper().AsSpan(index).StartsWith(symbol))
+                if (romanNumber.AsSpan(index).StartsWith(symbol))
                 {
                     result += value;
                     index += symbol.Length;
@@ -57,17 +61,16 @@ public static class Converter
     
     private static void ValidateRomanNumber(string romanNumber)
     {
-        if (string.IsNullOrWhiteSpace(romanNumber))
-            throw new ArgumentException("Please provide a valid roman number.");
+        if (!Regex.IsMatch(romanNumber, "^[IVXLCDM]+$"))
+            throw new ArgumentException("A roman number can only contain characters 'I', 'V', 'X', 'L', 'C', 'D' and 'M'.");
         
-        var containsValidSymbols  = Regex.IsMatch(romanNumber, "^[IVXLCDM]+$", RegexOptions.IgnoreCase);
-        if (!containsValidSymbols)
-            throw new ArgumentException("Please provide a valid roman number.");
-        
-        var invalidRepetition  = Regex.Match(romanNumber, @"(.)\1{3}");
-        if (invalidRepetition.Success)
-            throw new ArgumentException($"Not a valid roman number since '{invalidRepetition.Groups[1].Value}' " +
-                                        "is repeated more than three times.");
-        
+        /*
+         Validation logic from Project Euler (https://projecteuler.net/about=roman_numerals)
+         1. Descending order, the larger symbol must occur first
+         2. Validate subtractive notations (e.g., IV, XL, CM are valid but XM is not)
+         3. "Contemporary" repetition rules (a symbol must not occur more than three times; D, L and V can only appear once)
+         */
+        if (!Regex.IsMatch(romanNumber, "^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$"))
+            throw new ArgumentException("An invalid roman number was provided.");
     }
 }

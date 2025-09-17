@@ -3,6 +3,11 @@
 # Roman Numeral Converter
 Contrary to my initial assumption, it was quite an enjoyable exercise, especially going through the validation rules. It was also interesting to read on Wikipedia how numbers like IIII, XXXX, CCCCLXXXX were historically used but will now be considered completely invalid. I have been exploring the rules further on [Project Euler](https://projecteuler.net/about=roman_numerals). I might find some time to fully implement all of it one day. :)
 
+**Update [17/09/2025]:** Added three major validation rules from [Project Euler](https://projecteuler.net/about=roman_numerals):
+1. Descending order, the larger symbol must occur first
+2. Validate subtractive notations (e.g., IV, XL, CM are valid but XM is not)
+3. "Contemporary" repetition rules (a symbol must not occur more than three times; D, L and V can only appear once)
+
 ## Design Approach
 - Some samples were already provided in the task brief, which made it quite easy to develop using [**TDD (Test-Driven Development)**](https://martinfowler.com/bliki/TestDrivenDevelopment.html).
 - I kept the classes and methods static, it would likely to be a utility class in a real-world scenario anyway.
