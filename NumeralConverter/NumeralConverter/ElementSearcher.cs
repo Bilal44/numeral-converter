@@ -39,6 +39,11 @@ public static class ElementSearcher
         return Backtrack(word, 0, memo);
     }
     
+    /// <summary>
+    /// This function recursively searches for matching element symbols in the periodic table
+    /// (<c>Elements</c> dictionary) using backtracking. The results are cached in <c>memo</c>
+    /// for faster retrieval in future to avoid repeated searches in the periodic table.
+    /// </summary>
     private static List<List<string>> Backtrack(string word, int position, Dictionary<int, List<List<string>>> memo)
     {
         if (memo.TryGetValue(position, out var cached))
